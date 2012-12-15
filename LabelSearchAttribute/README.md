@@ -9,7 +9,7 @@ LabelSearchAttribute
 |---|---|
 |labelName|検索したいラベル名|
 |limit|最大検索数 ( 配列で使用 )|
-|direction|降順か昇順か ( デフォルトは昇順 ) |
+|direction|アセット名で降順か昇順か ( デフォルトは昇順 ) |
 
 ###一応使えるもの
 
