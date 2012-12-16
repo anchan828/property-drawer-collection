@@ -1,7 +1,7 @@
 AnimatorParamatorAttribute
 ==========================
 
-Animatorウィンドウにあるパラメータをタイプセーフにフィールドにアタッチすることができます。
+Animatorウィンドウにあるパラメータ**名**をタイプセーフにフィールドにアタッチすることができます。
 
 ![](http://d3j5vwomefv46c.cloudfront.net/photos/large/702796338.png?key=48097&Expires=1355649945&Key-Pair-Id=APKAIYVGSUJFNRFZBBTA&Signature=PNhnGUw8pATXYatWFqWED1fyNiNPmPb~DxnuCM5AetStU4HpzE14PmUnAxtwStiVsW~hZnwYvQ6kJ-EG-lEsVgleY7FxL7LKSL5-UqmRwVhxXCIIPHXX~Z657blExzsRRtU--vOceYCjOHf7moUKxTuLUhgFiw1L0EJ~9~JLR5M_)
 
