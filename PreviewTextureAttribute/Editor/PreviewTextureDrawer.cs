@@ -30,26 +30,28 @@ public class PreviewTextureDrawer : PropertyDrawer
       
         if (property.objectReferenceValue != null) 
             DrawTexture (position, (Texture)property.objectReferenceValue);
-        else 
-            previewTextureAttribute.lastPosition = new Rect (0, 0, 0, 0);
     }
 
     void DrawStringValue (Rect position, SerializedProperty property, GUIContent label)
     {
+        EditorGUI.BeginChangeCheck ();
         property.stringValue = EditorGUI.TextField (position, label, property.stringValue);
-       
+        if (EditorGUI.EndChangeCheck ()) {
+            previewTextureAttribute.www = null;
+            previewTextureAttribute.cached = null;
+        }
         string path = GetCachedTexturePath (property.stringValue);
         
         if (!string.IsNullOrEmpty (path)) {
             if (IsExpired (path)) {
-                File.Delete (path);
-                previewTextureAttribute.cached = null;
+                Delete (path);
             } else 
                 previewTextureAttribute.cached = GetTextureFromCached (path);
         } else
             previewTextureAttribute.cached = null;
+
         if (previewTextureAttribute.cached == null) {
-            previewTextureAttribute.cached = GetTextureFromWWW (property);
+            previewTextureAttribute.cached = GetTextureFromWWW (position, property);
         } else
             DrawTexture (position, previewTextureAttribute.cached);
     }
@@ -72,18 +74,21 @@ public class PreviewTextureDrawer : PropertyDrawer
         return string.Empty;
     }
 
-    Texture GetTextureFromWWW (SerializedProperty property)
+    Texture GetTextureFromWWW (Rect position, SerializedProperty property)
     {
         if (previewTextureAttribute.www == null) {
             previewTextureAttribute.www = new WWW (property.stringValue);
+        } else if (!previewTextureAttribute.www.isDone) {
+            previewTextureAttribute.lastPosition = new Rect (position.x, position.y + 16, position.width, 16);
+            EditorGUI.ProgressBar (previewTextureAttribute.lastPosition, previewTextureAttribute.www.progress, "Downloading... " + (previewTextureAttribute.www.progress * 100) + "%");
         } else if (previewTextureAttribute.www.isDone) {
-            if (previewTextureAttribute.www.error != null) {
-                return EditorGUIUtility.whiteTexture;
-            }
+
+            if (previewTextureAttribute.www.error != null)
+                return null;
 
             int hash = property.stringValue.GetHashCode ();
             long expire = (System.DateTime.Now.Ticks + previewTextureAttribute.expire);
-            File.WriteAllBytes (string.Format ("Temp/{0}_{1}_{2}_{3}", hash, expire,  previewTextureAttribute.www.texture.width,  previewTextureAttribute.www.texture.height), previewTextureAttribute.www.bytes);
+            File.WriteAllBytes (string.Format ("Temp/{0}_{1}_{2}_{3}", hash, expire, previewTextureAttribute.www.texture.width, previewTextureAttribute.www.texture.height), previewTextureAttribute.www.bytes);
             return  previewTextureAttribute.www.texture;
         }
         return null;
@@ -104,5 +109,11 @@ public class PreviewTextureDrawer : PropertyDrawer
         float width = Mathf.Clamp (texture.width, position.width * 0.7f, position.width * 0.7f);
         previewTextureAttribute.lastPosition = new Rect (position.width * 0.15f, position.y + 16, width, texture.height * (width / texture.width));
         EditorGUI.DrawPreviewTexture (previewTextureAttribute.lastPosition, texture);
+    }
+
+    void Delete (string path)
+    {
+        File.Delete (path);
+        previewTextureAttribute.cached = null;
     }
 }
