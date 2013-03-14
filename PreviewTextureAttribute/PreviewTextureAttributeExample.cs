@@ -3,9 +3,10 @@ using System.Collections;
 
 public class PreviewTextureAttributeExample : MonoBehaviour
 {
+    [PreviewTexture(60)]
+    public string
+        textureURL = "https://www.hogehoge.com/image.png";
 
-	[PreviewTexture]
-	public Texture2D texture;
-	[PreviewTexture]
-	public Texture2D texture2;
+    [PreviewTexture]
+    public Texture hoge;
 }
