@@ -6,7 +6,7 @@ public class PreviewTextureAttribute : PropertyAttribute
     public Rect lastPosition = new Rect (0, 0, 0, 0);
     public long expire = 6000000000; // 10min
     public WWW www;
-    public Texture cached;
+    public Texture2D cached;
 
     public PreviewTextureAttribute ()
     {

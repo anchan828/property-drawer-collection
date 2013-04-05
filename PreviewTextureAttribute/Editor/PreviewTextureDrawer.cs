@@ -26,10 +26,10 @@ public class PreviewTextureDrawer : PropertyDrawer
 
     void DrawTextureValue (Rect position, SerializedProperty property, GUIContent label)
     {
-        property.objectReferenceValue = (Texture)EditorGUI.ObjectField (position, label, property.objectReferenceValue, typeof(Texture), false);
+        property.objectReferenceValue = (Texture2D)EditorGUI.ObjectField (position, label, property.objectReferenceValue, typeof(Texture2D), false);
       
         if (property.objectReferenceValue != null) 
-            DrawTexture (position, (Texture)property.objectReferenceValue);
+            DrawTexture (position, (Texture2D)property.objectReferenceValue);
     }
 
     void DrawStringValue (Rect position, SerializedProperty property, GUIContent label)
@@ -45,7 +45,7 @@ public class PreviewTextureDrawer : PropertyDrawer
         if (!string.IsNullOrEmpty (path)) {
             if (IsExpired (path)) {
                 Delete (path);
-            } else 
+            } else if (previewTextureAttribute.cached == null)
                 previewTextureAttribute.cached = GetTextureFromCached (path);
         } else
             previewTextureAttribute.cached = null;
@@ -74,7 +74,7 @@ public class PreviewTextureDrawer : PropertyDrawer
         return string.Empty;
     }
 
-    Texture GetTextureFromWWW (Rect position, SerializedProperty property)
+    Texture2D GetTextureFromWWW (Rect position, SerializedProperty property)
     {
         if (previewTextureAttribute.www == null) {
             previewTextureAttribute.www = new WWW (property.stringValue);
@@ -94,21 +94,29 @@ public class PreviewTextureDrawer : PropertyDrawer
         return null;
     }
 
-    Texture GetTextureFromCached (string path)
+    Texture2D GetTextureFromCached (string path)
     {
         string[] split = Path.GetFileNameWithoutExtension (path).Split ('_');
         int width = int.Parse (split [2]);
         int height = int.Parse (split [3]);
         Texture2D t = new Texture2D (width, height);
 
-        return t.LoadImage (File.ReadAllBytes (path)) ? (Texture)t : null;
+        return t.LoadImage (File.ReadAllBytes (path)) ? t : null;
     }
 
-    void DrawTexture (Rect position, Texture texture)
+    private GUIStyle style;
+
+    void DrawTexture (Rect position, Texture2D texture)
     {
         float width = Mathf.Clamp (texture.width, position.width * 0.7f, position.width * 0.7f);
         previewTextureAttribute.lastPosition = new Rect (position.width * 0.15f, position.y + 16, width, texture.height * (width / texture.width));
-        EditorGUI.DrawPreviewTexture (previewTextureAttribute.lastPosition, texture);
+        
+        if(style == null){
+            style = new GUIStyle ();
+            style.imagePosition = ImagePosition.ImageOnly;
+        }
+        style.normal.background = texture;
+        GUI.Label (previewTextureAttribute.lastPosition, "", style);
     }
 
     void Delete (string path)
