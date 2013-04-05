@@ -1,4 +1,4 @@
-AnimatorParamatorAttribute
+AnimatorParamaterAttribute
 ==========================
 
 Animatorウィンドウにあるパラメータ **名** をタイプセーフにフィールドにアタッチすることができます。
@@ -9,7 +9,7 @@ Animatorウィンドウにあるパラメータ **名** をタイプセーフに
 
 |変数|説明|
 |---|---|
-|paramatorType|型を指定して選択したい場合に設定する|
+|paramaterType|型を指定して選択したい場合に設定する|
 
 ###使い方
 
@@ -17,26 +17,26 @@ Animatorウィンドウにあるパラメータ **名** をタイプセーフに
 using UnityEngine;
 using System.Collections;
 
-public class AnimatorParamatorAttributeExample : MonoBehaviour
+public class AnimatorParamaterAttributeExample : MonoBehaviour
 {
 	//型指定なし
-	[AnimatorParamator]
+	[AnimatorParamater]
 	public string param;
 	
 	//Vectorのみ
-	[AnimatorParamator(AnimatorParamatorAttribute.ParamatorType.Vector)]
+	[AnimatorParamater(AnimatorParamaterAttribute.ParamaterType.Vector)]
 	public string vectortParam;
 	
 	//Floatのみ
-	[AnimatorParamator(AnimatorParamatorAttribute.ParamatorType.Float)]
+	[AnimatorParamater(AnimatorParamaterAttribute.ParamaterType.Float)]
 	public string floatParam;
 	
 	//Intのみ
-	[AnimatorParamator(AnimatorParamatorAttribute.ParamatorType.Int)]
+	[AnimatorParamater(AnimatorParamaterAttribute.ParamaterType.Int)]
 	public string intParam;
 	
 	//Boolのみ
-	[AnimatorParamator(AnimatorParamatorAttribute.ParamatorType.Bool)]
+	[AnimatorParamater(AnimatorParamaterAttribute.ParamaterType.Bool)]
 	public string boolParam;
 }
 

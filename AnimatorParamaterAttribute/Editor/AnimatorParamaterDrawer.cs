@@ -16,18 +16,18 @@ using System.Collections.Generic;
 /// <exception cref='MissingComponentException'>
 /// Is thrown when the missing component exception.
 /// </exception>
-[CustomPropertyDrawer(typeof(AnimatorParamatorAttribute))]
-public class AnimatorParamatorDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(AnimatorParamaterAttribute))]
+public class AnimatorParamaterDrawer : PropertyDrawer
 {
     public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
     {
         AnimatorController animatorController = GetAnimatorController (property);
-
+        if( animatorController == null)return;
         int eventCount = animatorController.GetEventCount ();
 
         if (eventCount == 0)
         {
-            Debug.LogWarning ("AnimationParamator is 0");
+            Debug.LogWarning ("AnimationParamater is 0");
             property.stringValue = string.Empty;
             return;
         }
@@ -45,7 +45,7 @@ public class AnimatorParamatorDrawer : PropertyDrawer
 
         if (eventNames.Count == 0)
         {
-            Debug.LogWarning (string.Format ("{0} Paramator is 0", animatorParamatorAttribute.paramatorType));
+            Debug.LogWarning (string.Format ("{0} Paramater is 0", animatorParamaterAttribute.paramaterType));
             property.stringValue = string.Empty;
             return;
         }
@@ -56,12 +56,12 @@ public class AnimatorParamatorDrawer : PropertyDrawer
 
         if (matchIndex != -1)
         {
-            animatorParamatorAttribute.selectedValue = matchIndex;
+            animatorParamaterAttribute.selectedValue = matchIndex;
         }
 
-        animatorParamatorAttribute.selectedValue = EditorGUI.IntPopup (position, label.text, animatorParamatorAttribute.selectedValue, eventNamesArray, SetOptionValues (eventNamesArray));
+        animatorParamaterAttribute.selectedValue = EditorGUI.IntPopup (position, label.text, animatorParamaterAttribute.selectedValue, eventNamesArray, SetOptionValues (eventNamesArray));
 
-        property.stringValue = eventNamesArray [animatorParamatorAttribute.selectedValue];
+        property.stringValue = eventNamesArray [animatorParamaterAttribute.selectedValue];
 
     }
 
@@ -87,7 +87,8 @@ public class AnimatorParamatorDrawer : PropertyDrawer
         Animator anim = component.GetComponent<Animator> ();
         if (anim == null)
         {
-            throw new MissingComponentException ("Missing Aniamtor Component");
+            Debug.LogException(new MissingComponentException ("Missing Aniamtor Component"));
+            return null;
         }
 
         AnimatorController animatorController = AnimatorController.GetAnimatorController (anim);
@@ -109,8 +110,8 @@ public class AnimatorParamatorDrawer : PropertyDrawer
 
     bool CanAddEventName (AnimatorController animatorController, int index)
     {
-        return !(animatorParamatorAttribute.paramatorType != AnimatorParamatorAttribute.ParamatorType.None
-                 && animatorController.GetEventType (index) != (int)animatorParamatorAttribute.paramatorType);
+        return !(animatorParamaterAttribute.paramaterType != AnimatorParamaterAttribute.ParamaterType.None
+                 && animatorController.GetEventType (index) != (int)animatorParamaterAttribute.paramaterType);
     }
 
     /// <summary>
@@ -132,11 +133,11 @@ public class AnimatorParamatorDrawer : PropertyDrawer
         return optionValues;
     }
 
-    AnimatorParamatorAttribute animatorParamatorAttribute
+    AnimatorParamaterAttribute animatorParamaterAttribute
     {
         get
         {
-            return (AnimatorParamatorAttribute)attribute;
+            return (AnimatorParamaterAttribute)attribute;
         }
     }
 
