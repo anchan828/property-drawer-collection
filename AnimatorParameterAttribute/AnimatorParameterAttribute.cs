@@ -4,12 +4,12 @@ using System.Collections;
 /// <summary>
 /// Animator Paramater attribute.
 /// </summary>
-public class AnimatorParamaterAttribute : PropertyAttribute
+public class AnimatorParameterAttribute : PropertyAttribute
 {
     /// <summary>
     /// パラメータの型。デフォルトでは型を考慮しない
     /// </summary>
-    public ParamaterType paramaterType = ParamaterType.None;
+    public ParameterType parameterType = ParameterType.None;
 
     /// <summary>
     /// 現在選択中のindex
@@ -17,24 +17,24 @@ public class AnimatorParamaterAttribute : PropertyAttribute
     public int selectedValue = 0;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AnimatorParamaterAttribute"/> class.
+    /// Initializes a new instance of the <see cref="AnimatorParameterAttribute"/> class.
     /// </summary>
-    public AnimatorParamaterAttribute () : this(ParamaterType.None)
+    public AnimatorParameterAttribute () : this(ParameterType.None)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AnimatorParamaterAttribute"/> class.
+    /// Initializes a new instance of the <see cref="AnimatorParameterAttribute"/> class.
     /// </summary>
     /// <param name='ParamaterType'>
     /// 型を指定して選択肢たい場合に設定する
     /// </param>
-    public AnimatorParamaterAttribute (ParamaterType ParamaterType)
+    public AnimatorParameterAttribute (ParameterType paramaterType)
     {
-        this.paramaterType = ParamaterType;
+        this.parameterType = parameterType;
     }
  
-    public AnimatorParamaterAttribute (string paramaterName)
+    public AnimatorParameterAttribute (string paramaterName)
     {
        Debug.Log(this.TypeId.GetType());
     }
@@ -42,7 +42,7 @@ public class AnimatorParamaterAttribute : PropertyAttribute
     /// <summary>
     /// 型のタイプ。型指定をしたい時に使用する
     /// </summary>
-    public enum ParamaterType
+    public enum ParameterType
     {
         Vector = 0,
         Float = 1,

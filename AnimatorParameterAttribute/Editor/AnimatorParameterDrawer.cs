@@ -16,8 +16,8 @@ using System.Collections.Generic;
 /// <exception cref='MissingComponentException'>
 /// Is thrown when the missing component exception.
 /// </exception>
-[CustomPropertyDrawer(typeof(AnimatorParamaterAttribute))]
-public class AnimatorParamaterDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(AnimatorParameterAttribute))]
+public class AnimatorParameterDrawer : PropertyDrawer
 {
     public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
     {
@@ -45,7 +45,7 @@ public class AnimatorParamaterDrawer : PropertyDrawer
 
         if (eventNames.Count == 0)
         {
-            Debug.LogWarning (string.Format ("{0} Paramater is 0", animatorParamaterAttribute.paramaterType));
+            Debug.LogWarning (string.Format ("{0} Parameter is 0", animatorParameterAttribute.parameterType));
             property.stringValue = string.Empty;
             return;
         }
@@ -56,12 +56,12 @@ public class AnimatorParamaterDrawer : PropertyDrawer
 
         if (matchIndex != -1)
         {
-            animatorParamaterAttribute.selectedValue = matchIndex;
+            animatorParameterAttribute.selectedValue = matchIndex;
         }
 
-        animatorParamaterAttribute.selectedValue = EditorGUI.IntPopup (position, label.text, animatorParamaterAttribute.selectedValue, eventNamesArray, SetOptionValues (eventNamesArray));
+        animatorParameterAttribute.selectedValue = EditorGUI.IntPopup (position, label.text, animatorParameterAttribute.selectedValue, eventNamesArray, SetOptionValues (eventNamesArray));
 
-        property.stringValue = eventNamesArray [animatorParamaterAttribute.selectedValue];
+        property.stringValue = eventNamesArray [animatorParameterAttribute.selectedValue];
 
     }
 
@@ -110,8 +110,8 @@ public class AnimatorParamaterDrawer : PropertyDrawer
 
     bool CanAddEventName (AnimatorController animatorController, int index)
     {
-        return !(animatorParamaterAttribute.paramaterType != AnimatorParamaterAttribute.ParamaterType.None
-                 && animatorController.GetEventType (index) != (int)animatorParamaterAttribute.paramaterType);
+        return !(animatorParameterAttribute.parameterType != AnimatorParameterAttribute.ParameterType.None
+                 && animatorController.GetEventType (index) != (int)animatorParameterAttribute.parameterType);
     }
 
     /// <summary>
@@ -133,11 +133,11 @@ public class AnimatorParamaterDrawer : PropertyDrawer
         return optionValues;
     }
 
-    AnimatorParamaterAttribute animatorParamaterAttribute
+    AnimatorParameterAttribute animatorParameterAttribute
     {
         get
         {
-            return (AnimatorParamaterAttribute)attribute;
+            return (AnimatorParameterAttribute)attribute;
         }
     }
 
