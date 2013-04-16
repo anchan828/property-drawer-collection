@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PopupAttribute : PropertyAttribute
 {
-    public string[] names;
+    public object[] list;
     
-    public PopupAttribute (params string[] names)
+    public PopupAttribute (params object[] list)
     {
-        this.names = names;
+        this.list = list;
     }
 }
