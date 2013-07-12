@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HeaderAttributeExample : MonoBehaviour
+public class HeaderExample : MonoBehaviour
 {
 		[Header("Header","text text text text... ")]
 		public string

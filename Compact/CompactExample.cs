@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CompactAttributeExample : MonoBehaviour
+public class CompactExample : MonoBehaviour
 {
 	[Compact]
 	public Vector2 vector2;

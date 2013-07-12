@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PreviewTextureAttributeExample : MonoBehaviour
+public class PreviewTextureExample : MonoBehaviour
 {
     [PreviewTexture(60)]
     public string

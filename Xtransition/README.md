@@ -1,4 +1,4 @@
-XtransitionAttribute
+Xtransition
 ==========================
 
 これは [Transition Toolkit](https://www.assetstore.unity3d.com/#/content/5992)専用のAttributeです。

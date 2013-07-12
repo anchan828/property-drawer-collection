@@ -1,4 +1,4 @@
-LabelSearchAttribute
+LabelSearch
 ==========================
 
 ラベル名からアセットを検索しフィールドにアタッチすることができます。
@@ -28,7 +28,7 @@ using System.Collections;
 /// <summary>
 /// Label attribute example.
 /// </summary>
-public class LabelSearchAttributeExample : MonoBehaviour
+public class LabelSearchExample : MonoBehaviour
 {
 
     //ラベル名TestがついたMaterial型の検索

@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Label attribute example.
 /// </summary>
-public class LabelSearchAttributeExample : MonoBehaviour
+public class LabelSearchExample : MonoBehaviour
 {
 
 

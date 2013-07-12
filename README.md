@@ -10,10 +10,10 @@ CustomPropertyについて詳しくは[こちら](http://blogs.unity3d.com/2012/
 フォルダ構成
 
 ```
- ○○Attribute (フォルダ) 
+ ○○ (フォルダ) 
 	|- [Editor] (フォルダ)
 	|	 |-[○○Drawer] (スクリプト)
 	|- [○○Attribute] (スクリプト)
-	|- [○○AttributeExample] (スクリプト)
+	|- [○○Example] (スクリプト)
 	|- [README] (テキスト)
 ```

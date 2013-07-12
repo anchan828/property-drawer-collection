@@ -1,7 +1,17 @@
+Password
+==========================
+
+パスワードをマスク('*')表示します。
+
+Attributeは必ずstringにつけてください。
+
+###使い方
+
+```
 using UnityEngine;
 using System.Collections;
 
-public class PasswordAttributeExample : MonoBehaviour
+public class PasswordExample : MonoBehaviour
 {
 	[Password]
 	public string pass;
@@ -12,3 +22,5 @@ public class PasswordAttributeExample : MonoBehaviour
 	[Password( 5, 6, false )]
 	public string pass4;
 }
+
+```

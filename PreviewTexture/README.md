@@ -1,4 +1,4 @@
-PreviewTextureAttribute
+PreviewTexture
 ==========================
 
 テクスチャのプレビューを表示します。

@@ -1,4 +1,4 @@
-HeaderAttribute
+Header
 ==========================
 
 ![](https://raw.github.com/anchan828/file-place/master/property-drawer-collection/Screen%20Shot%202013-07-12%20at%2017.55.30.png)
@@ -17,7 +17,7 @@ Headerとして機能するPropertyDrawer
 ```
 using UnityEngine;
 
-public class HeaderAttributeExample : MonoBehaviour
+public class HeaderExample : MonoBehaviour
 {
 		[Header("初期設定","最初にこんな感じでHeaderをつける")]
 		public string hoge;

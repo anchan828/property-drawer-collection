@@ -1,9 +1,18 @@
-SceneNameAttribute
+SceneName
 ==========================
 
 有効なシーン名をPopupで選択することができます。
 
 Attributeは必ずstringにつけてください。
 
-詳しくはSceneNameAttribute.csを御覧ください
+###使い方
 
+```
+using UnityEngine;
+
+public class SceneNameExample : MonoBehaviour
+{
+	[SceneName]
+	public string sceneName;
+}
+```

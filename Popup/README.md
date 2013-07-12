@@ -1,4 +1,4 @@
-PopupAttribute
+Popup
 ==========================
 
 
@@ -11,7 +11,7 @@ PopupAttribute
 using UnityEngine;
 using System.Collections;
 
-public class PopupAttributeExample : MonoBehaviour
+public class PopupExample : MonoBehaviour
 {
     [Popup("Hoge","Fuga","Foo","Bar")]
     public string popup;

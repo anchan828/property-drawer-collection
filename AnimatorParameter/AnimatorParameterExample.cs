@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
-public class AnimatorParameterAttributeExample : MonoBehaviour
+public class AnimatorParameterExample : MonoBehaviour
 {
     [AnimatorParameter]
     public string param;
