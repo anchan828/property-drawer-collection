@@ -28,7 +28,7 @@ public class HeaderDrawer : PropertyDrawer
 
 		public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
 		{
-				return base.GetPropertyHeight (property, label) + HeaderHeight + string.IsNullOrEmpty (headerAttribute.text) ? 0 : TextHeight;
+				return base.GetPropertyHeight (property, label) + HeaderHeight + (string.IsNullOrEmpty (headerAttribute.text) ? 0 : TextHeight);
 		}
 
 		HeaderAttribute headerAttribute {
