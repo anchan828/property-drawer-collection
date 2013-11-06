@@ -1,9 +1,10 @@
 AnimatorParameter
 ==========================
 
-Animatorウィンドウにあるパラメータ **名** をタイプセーフにフィールドにアタッチすることができます。
+Animatorウィンドウにあるパラメータ名をタイプセーフにフィールドにアタッチすることができます。
 
-![](http://d3j5vwomefv46c.cloudfront.net/photos/large/702796338.png?key=48097&Expires=1355649945&Key-Pair-Id=APKAIYVGSUJFNRFZBBTA&Signature=PNhnGUw8pATXYatWFqWED1fyNiNPmPb~DxnuCM5AetStU4HpzE14PmUnAxtwStiVsW~hZnwYvQ6kJ-EG-lEsVgleY7FxL7LKSL5-UqmRwVhxXCIIPHXX~Z657blExzsRRtU--vOceYCjOHf7moUKxTuLUhgFiw1L0EJ~9~JLR5M_)
+
+![](https://dl.dropboxusercontent.com/u/153254465/screenshot/JPUWSF-KDAAXR-WYWUOZ-RRNJKS-VIHIIR-UABGAM-XROUNH-OXWCVT-DWUJND-NJFUPS-KVMSXL-YNPGLA-WSMIUE-OVSNRG-XZVILP-XOXYJH-QZFYRX-OPKORW-OINPCM-YZSBNP-ZZVAZL-EQPWCN-KYPNCD-OYUUTE-NDEWFH-ZIPULW-ZEINFI-IICHRK-KYXTVL-QGNAFO-WMRBCU-RXMZTE-2013-11-07_at_2.32.21.png)
 
 ###引数
 
@@ -15,20 +16,38 @@ Animatorウィンドウにあるパラメータ **名** をタイプセーフに
 
 ```
 using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 public class AnimatorParameterExample : MonoBehaviour
 {
     [AnimatorParameter]
     public string param;
-    [AnimatorParameter(AnimatorParameterAttribute.ParameterType.Vector)]
-    public string vectortParam;
     [AnimatorParameter(AnimatorParameterAttribute.ParameterType.Float)]
     public string floatParam;
     [AnimatorParameter(AnimatorParameterAttribute.ParameterType.Int)]
     public string intParam;
     [AnimatorParameter(AnimatorParameterAttribute.ParameterType.Bool)]
     public string boolParam;
+    [AnimatorParameter(AnimatorParameterAttribute.ParameterType.Trigger)]
+    public string triggerParam;
+
+
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        float f = animator.GetFloat(floatParam);
+
+        int i = animator.GetInteger(intParam);
+
+        bool b = animator.GetBool(boolParam);
+
+        animator.SetTrigger(triggerParam);
+    }
 }
 ```

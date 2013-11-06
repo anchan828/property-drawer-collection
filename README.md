@@ -11,8 +11,6 @@ CustomPropertyについて詳しくは[こちら](http://blogs.unity3d.com/2012/
 
 ```
  ○○ (フォルダ) 
-	|- [Editor] (フォルダ)
-	|	 |-[○○Drawer] (スクリプト)
 	|- [○○Attribute] (スクリプト)
 	|- [○○Example] (スクリプト)
 	|- [README] (テキスト)
