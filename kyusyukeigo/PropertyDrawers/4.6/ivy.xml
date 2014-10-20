@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+  <info version="4.6.0" organisation="kyusyukeigo" module="PropertyDrawers" e:packageType="UnityExtension" e:unityVersion="4.6" />
+  <publications>
+    <artifact name="PropertyDrawers" type="dll" ext="dll" e:guid="f5f67c52d1564df4a8936ccd202a3bd7" />
+    <artifact name="Editor/PropertyDrawers-Editor" type="dll" ext="dll" e:guid="80a3616ca19596e4da0f10f14d241e9e" />
+  </publications>
+</ivy-module>
