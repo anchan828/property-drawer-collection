@@ -1,7 +1,8 @@
+using System.Linq;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditorInternal;
+using UnityEditor.Animations;
 using System;
 using System.Collections.Generic;
 #endif
@@ -44,7 +45,6 @@ public class AnimatorParameterAttribute : PropertyAttribute
     /// </summary>
     public enum ParameterType
     {
-        Vector = 0,
         Float = 1,
         Int = 3,
         Bool = 4,
@@ -70,16 +70,16 @@ public class AnimatorParameterDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        AnimatorController animatorController = GetAnimatorController(property);
+        var animatorController = GetAnimatorController(property);
 
         if (animatorController == null)
         {
             DefaultInspector(position, property, label);
             return;
         }
-        int parameterCount = animatorController.parameterCount;
+        var parameters = animatorController.parameters;
 
-        if (parameterCount == 0)
+        if (parameters.Length == 0)
         {
             Debug.LogWarning("AnimationParamater is 0");
             property.stringValue = string.Empty;
@@ -87,16 +87,9 @@ public class AnimatorParameterDrawer : PropertyDrawer
             return;
         }
 
-        List<string> eventNames = new List<string>();
-
-        for (int i = 0; i < parameterCount; i++)
-        {
-            if (CanAddEventName(animatorController, i))
-            {
-              eventNames.Add(animatorController.GetParameter(i).name);
-            }
-           
-        }
+        var eventNames = parameters
+            .Where(t => CanAddEventName(t.type))
+            .Select(t => t.name).ToList();
 
         if (eventNames.Count == 0)
         {
@@ -106,9 +99,10 @@ public class AnimatorParameterDrawer : PropertyDrawer
             return;
         }
 
-        string[] eventNamesArray = eventNames.ToArray();
+        var eventNamesArray = eventNames.ToArray();
 
-        int matchIndex = eventNames.FindIndex(eventName => eventName.Equals(property.stringValue));
+        var matchIndex = eventNames
+            .FindIndex(eventName => eventName.Equals(property.stringValue));
 
         if (matchIndex != -1)
         {
@@ -133,22 +127,22 @@ public class AnimatorParameterDrawer : PropertyDrawer
 
     AnimatorController GetAnimatorController(SerializedProperty property)
     {
-        Component component = property.serializedObject.targetObject as Component;
+        var component = property.serializedObject.targetObject as Component;
 
         if (component == null)
         {
             throw new InvalidCastException("Couldn't cast targetObject");
         }
 
-        Animator anim = component.GetComponent<Animator>();
+        var anim = component.GetComponent<Animator>();
+
         if (anim == null)
         {
             Debug.LogException(new MissingComponentException("Missing Aniamtor Component"));
             return null;
         }
 
-        AnimatorController animatorController = AnimatorController.GetEffectiveAnimatorController(anim);
-        return animatorController;
+       return anim.runtimeAnimatorController as AnimatorController;
     }
 
     /// <summary>
@@ -164,10 +158,10 @@ public class AnimatorParameterDrawer : PropertyDrawer
     /// If set to <c>true</c> index.
     /// </param>
 
-    bool CanAddEventName(AnimatorController animatorController, int index)
+    bool CanAddEventName(AnimatorControllerParameterType animatorControllerParameterType)
     {
         return !(animatorParameterAttribute.parameterType != AnimatorParameterAttribute.ParameterType.None
-                 && (int)animatorController.GetParameter(index).type != (int)animatorParameterAttribute.parameterType);
+                 && (int)animatorControllerParameterType != (int)animatorParameterAttribute.parameterType);
     }
 
     /// <summary>
@@ -199,7 +193,7 @@ public class AnimatorParameterDrawer : PropertyDrawer
 
     void DefaultInspector(Rect position, SerializedProperty property, GUIContent label)
     {
-#if UNITY_4_3
+#if UNITY_5
             EditorGUI.PropertyField(position, property, label);
 #elif
              base.OnGUI(position,property,label);
