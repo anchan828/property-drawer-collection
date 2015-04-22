@@ -193,11 +193,7 @@ public class AnimatorParameterDrawer : PropertyDrawer
 
     void DefaultInspector(Rect position, SerializedProperty property, GUIContent label)
     {
-#if UNITY_5
             EditorGUI.PropertyField(position, property, label);
-#elif
-             base.OnGUI(position,property,label);
-#endif
     }
 }
 
