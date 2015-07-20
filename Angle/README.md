@@ -4,7 +4,7 @@ Angle
 マウスでドラッグすることのできるノブ(Knob)を表示します。
 
 
-![](https://dl.dropboxusercontent.com/u/153254465/screenshot2/ss%202015-02-17%2021.52.00.png)
+![](https://dl.dropboxusercontent.com/u/153254465/screenshot2/ss%202015-07-20%2014.42.13.png)
 
 ### 引数
 
